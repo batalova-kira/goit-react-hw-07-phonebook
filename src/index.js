@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { App } from 'components/App';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from 'components/GlobalStyle';
-import { persistor, store } from 'redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import { store } from 'redux/store';
 import { Provider } from 'react-redux';
 
 const theme = {
@@ -25,12 +24,10 @@ const theme = {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
-      <PersistGate persistor={persistor}>
-        <ThemeProvider theme={theme}>
-          <App />
-          <GlobalStyle />
-        </ThemeProvider>
-      </PersistGate>
+      <ThemeProvider theme={theme}>
+        <App />
+        <GlobalStyle />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );

@@ -1,10 +1,10 @@
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { nanoid } from 'nanoid';
 import { ErrMessage, Input, StyledForm } from './ContactForm.styled';
 import { BtnClose } from 'components/ContactCard/ContactCard.styled';
 import { useDispatch, useSelector } from 'react-redux';
-import { onAddContact, selectContacts } from 'redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operation';
 
 const contactSchema = Yup.object().shape({
   name: Yup.string()
@@ -18,7 +18,7 @@ export const ContactForm = () => {
   const contacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
-  const addContact = newContact => {
+  const onAddContact = newContact => {
     const hasContact = contacts.some(
       ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
     );
@@ -29,9 +29,9 @@ export const ContactForm = () => {
     }
     const finalContact = {
       ...newContact,
-      id: nanoid(),
     };
-    dispatch(onAddContact(finalContact));
+    console.log(finalContact);
+    dispatch(addContact(finalContact));
   };
 
   return (
@@ -42,7 +42,7 @@ export const ContactForm = () => {
       }}
       validationSchema={contactSchema}
       onSubmit={(values, actions) => {
-        addContact(values);
+        onAddContact(values);
         actions.resetForm({
           values: {
             name: '',
