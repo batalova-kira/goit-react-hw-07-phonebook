@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { ContactForm } from './ContactForm/ContactForm';
-import Contactlist from './ContactList/Contactlist';
+import ContactList from './ContactList/Contactlist';
 import { Filter } from './Filter/Filter';
 import { Layout } from './Layout';
 import { selectError, selectIsLoading } from 'redux/selectors';
@@ -23,7 +23,7 @@ export const App = () => {
       {isLoading && !error && <b>Request in progress...</b>}
       <h2>Contacts</h2>
       <Filter />
-      <Contactlist />
+      <ContactList />
     </Layout>
   );
 };
