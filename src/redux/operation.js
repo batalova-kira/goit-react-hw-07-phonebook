@@ -23,8 +23,6 @@ export const addContact = createAsyncThunk(
         name: text.name,
         number: text.number,
       });
-      console.log(text.name);
-      console.log(text.number);
       return responce.data;
     } catch (e) {
       return thunkAPI.rejectWithValue(e.message);
